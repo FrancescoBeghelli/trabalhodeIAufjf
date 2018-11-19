@@ -8,24 +8,24 @@ import java.util.ArrayList;
  */
 public class Node {
 
-    String valor;
-    ArrayList<Node> adjacencias;
-    boolean visitado;
-    int dist;
-    Node pai;
+    public String valor;
+    public ArrayList<Node> adjacencias;
+    public boolean visitado;
+    public int dist;
+    public Node pai;
 
-    Node(String valor) {
+    public Node(String valor) {
         this.valor = valor;
         adjacencias = new ArrayList<>();
         visitado = false;
         dist = 0;
     }
 
-    void setValor(String valor) {
+    public void setValor(String valor) {
         this.valor = valor;
     }
 
-    boolean addCaminho(Node outroNode) {
+    public boolean addCaminho(Node outroNode) {
         if (adjacencias.contains(outroNode)) {
             return false;
         }
@@ -34,7 +34,7 @@ public class Node {
         return true;
     }
 
-    void setVisitado() {
+    public void setVisitado() {
         this.visitado = true;
     }
 
