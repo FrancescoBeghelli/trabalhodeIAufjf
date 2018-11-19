@@ -9,6 +9,6 @@ package PacoteAlgoritmos;
  *
  * @author Francesco
  */
-public class BuscaEmProfundidade {
+public class EstruturaAlgoritmos {
     
 }
