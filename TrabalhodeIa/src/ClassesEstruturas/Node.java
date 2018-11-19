@@ -11,9 +11,6 @@ public class Node {
     String valor;
     ArrayList<Node> adjacencias;
     boolean visitado;
-    int maiorSeq;
-    Node refMaxNextNode;
-    char color;
     int dist;
     Node pai;
 
@@ -21,8 +18,6 @@ public class Node {
         this.valor = valor;
         adjacencias = new ArrayList<>();
         visitado = false;
-        maiorSeq = 0;
-        refMaxNextNode = null;
         dist = 0;
     }
 
