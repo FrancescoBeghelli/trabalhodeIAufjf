@@ -3,7 +3,7 @@ package ClassesEstruturas;
 import java.util.ArrayList;
 
 /**
- *
+ * @author Larica
  * @author Francesco
  */
 public class Node {

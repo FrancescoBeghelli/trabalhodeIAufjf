@@ -6,7 +6,7 @@
 package ClassesEstruturas;
 
 /**
- *
+ * @author Larica
  * @author Francesco
  */
 public class Grafo {

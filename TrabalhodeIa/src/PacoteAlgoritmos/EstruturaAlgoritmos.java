@@ -11,14 +11,14 @@ import ClassesEstruturas.Grafo;
 import java.util.Stack;
 
 /**
- *
+ * @author Larica
  * @author Francesco
  */
 public class EstruturaAlgoritmos {
     
     static void buscaEmProfundidade(Grafo grafo, Node origem) {
     Stack<Node> pilha = new Stack<>();
-    ArrayList<Node> aberto = grafo;
+    ArrayList<Node> aberto = ;
     
     pilha.push(origem);
     boolean fracasso = false;

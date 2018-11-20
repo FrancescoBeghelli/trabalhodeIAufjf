@@ -6,7 +6,7 @@
 package trabalhodeia;
 
 /**
- *
+ * @author Larica
  * @author Francesco
  */
 public class TrabalhodeIa {
