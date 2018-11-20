@@ -7,6 +7,7 @@ package PacoteAlgoritmos;
 
 import java.util.ArrayList;
 import ClassesEstruturas.Node;
+import ClassesEstruturas.Grafo;
 import java.util.Stack;
 
 /**
@@ -15,15 +16,16 @@ import java.util.Stack;
  */
 public class EstruturaAlgoritmos {
     
-    static void buscaEmProfundidade(ArrayList<Node> grafo, Node origem) {
+    static void buscaEmProfundidade(Grafo grafo, Node origem) {
     Stack<Node> pilha = new Stack<>();
-    ArrayList<Node> aberto;
-    ArrayList<Node> fechado;
+    ArrayList<Node> aberto = grafo;
+    
     pilha.push(origem);
     boolean fracasso = false;
     boolean sucesso = false;    
     
     while (sucesso != false || fracasso != false) {
+        if(aberto == null)
         
         Node v = pilha.pop();
         System.out.println(pilha);
