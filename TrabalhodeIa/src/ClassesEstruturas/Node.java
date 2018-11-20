@@ -10,14 +10,12 @@ public class Node {
 
     public String valor;
     public ArrayList<Node> adjacencias;
-    public boolean visitado;
     public int dist;
     public Node pai;
 
     public Node(String valor) {
         this.valor = valor;
         adjacencias = new ArrayList<>();
-        visitado = false;
         dist = 0;
     }
 
@@ -32,10 +30,6 @@ public class Node {
 
         adjacencias.add(outroNode);
         return true;
-    }
-
-    public void setVisitado() {
-        this.visitado = true;
     }
 
     public String toString() {

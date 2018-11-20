@@ -17,15 +17,15 @@ public class EstruturaAlgoritmos {
     
     static void buscaEmProfundidade(ArrayList<Node> grafo, Node origem) {
     Stack<Node> pilha = new Stack<>();
-    for (int i = 0; i < grafo.size(); i++) {
-        grafo.get(i).visitado = false;            
-    }
-
+    ArrayList<Node> aberto;
+    ArrayList<Node> fechado;
     pilha.push(origem);
-    origem.setVisitado();
-
-    while (!pilha.isEmpty()) {
-        Node v = pilha.peek();
+    boolean fracasso = false;
+    boolean sucesso = false;    
+    
+    while (sucesso != false || fracasso != false) {
+        
+        Node v = pilha.pop();
         System.out.println(pilha);
 
         for(int i = 0; i <v.adjacencias.size(); i++){
@@ -36,8 +36,25 @@ public class EstruturaAlgoritmos {
                 adj.setVisitado();
             }                
         }
-        pilha.pop();
     }
+
+    enquanto não (sucesso ou fracasso) faça
+        se abertos = vazio então
+            fracasso := T;
+        senão
+            N := primeiro(abertos); {pilha(topo), fila(primeiro)}
+            se N = solução então
+                sucesso := T;
+            senão
+                enquanto R(N) ≠ vazio faça
+                    escolha r de R(N); new(u);
+                    u := r(N); insere(u, abertos);
+                    atualiza R(N);
+                fim-enquanto;
+                insere(N, fechados); {destrua(N)}
+            fim-se;
+        fim-se;
+    fim-enquanto;
 }
     
 }
