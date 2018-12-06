@@ -23,6 +23,7 @@ public class TrabalhodeIa {
         Grafo g = new Grafo();
         g = la.lerArquivo();
         
+        EstruturaAlgoritmos.buscaEmProfundidade(g.nodes.get(0), g.nodes.get(2));
         EstruturaAlgoritmos.backtracking(g.nodes.get(0), g.nodes.get(8));
         EstruturaAlgoritmos.buscaOrdenada(g.nodes.get(0), g.nodes.get(6), 5);
         EstruturaAlgoritmos.buscaEmLargura(g.nodes.get(7), g.nodes.get(1));
