@@ -1,6 +1,7 @@
 package ClassesEstruturas;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Ramon
@@ -10,12 +11,12 @@ import java.util.ArrayList;
 public class Node {
 
     public String valor;
-    public ArrayList<Adjacencia> adjacencias;
+    public HashMap<String, Adjacencia> adjacencias;
     public boolean isSolucao;
     
     public Node(String valor) {
         this.valor = valor;
-        adjacencias = new ArrayList<>();
+        adjacencias = new HashMap<>();
         isSolucao = false;
     }
 
@@ -24,11 +25,11 @@ public class Node {
     }
 
     public boolean addCaminho(Node outroNode, int dist) {
-        if (adjacencias.contains(outroNode)) {
+        if (adjacencias.containsKey(outroNode.valor)) {
             return false;
         }
 
-        adjacencias.add(new Adjacencia(dist, outroNode) );
+        adjacencias.put(outroNode.valor, new Adjacencia(dist, outroNode));
         return true;
     }
 

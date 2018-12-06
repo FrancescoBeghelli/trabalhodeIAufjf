@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import ClassesEstruturas.Node;
 import ClassesEstruturas.Grafo;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
@@ -47,7 +48,7 @@ public class EstruturaAlgoritmos {
                 }
                 else
                 {
-                   for(Adjacencia adj : v.adjacencias){
+                   for(Adjacencia adj : v.adjacencias.values()){
                         Node prox = adj.getProx();
                         if(!visitados.containsKey(prox.valor)){
                             System.out.println(v.valor + " >> " + prox.valor);
@@ -63,15 +64,34 @@ public class EstruturaAlgoritmos {
         if(sucesso)
         {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
-            imprimeSolução(visitados);
+            imprimeSolucao(visitados);
         }
         else
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
     }
     
-    public static void imprimeSolução(HashMap<String, Node> visitados)
+    //computa o conjunto solução
+    public static void imprimeSolucao(HashMap<String, Node> visitados)
     {
+        System.out.println("Conjunto solução: ");
+        StringBuilder sb = new StringBuilder();
         
+        Node anterior = null;
+        int custo = 0;
+        for (Node v : visitados.values()) {
+            if(v.isSolucao)
+            {
+                sb.append(" [" + v.valor + "]");
+                
+                if(anterior != null)
+                {
+                    custo += anterior.adjacencias.get(v.valor).getDist();
+                }
+                anterior = v;
+            }
+        }
+        
+        System.out.println("Custo total: " + custo);
     }
     
 }
