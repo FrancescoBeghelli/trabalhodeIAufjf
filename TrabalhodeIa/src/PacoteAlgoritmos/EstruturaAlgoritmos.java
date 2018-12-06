@@ -11,8 +11,9 @@ import ClassesEstruturas.Grafo;
 import java.util.Stack;
 
 /**
- * @author Larica
+ * @author Ramon
  * @author Francesco
+ * @author Guilherme Carvalho
  */
 public class EstruturaAlgoritmos {
     

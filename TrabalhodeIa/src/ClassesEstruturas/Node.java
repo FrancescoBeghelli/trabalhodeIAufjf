@@ -3,20 +3,18 @@ package ClassesEstruturas;
 import java.util.ArrayList;
 
 /**
- * @author Larica
+ * @author Ramon
  * @author Francesco
+ * @author Luís Guilherme Carvalho
  */
 public class Node {
 
     public String valor;
-    public ArrayList<Node> adjacencias;
-    public int dist;
-    public Node pai;
+    public ArrayList<Adjacencia> adjacencias;
 
     public Node(String valor) {
         this.valor = valor;
         adjacencias = new ArrayList<>();
-        dist = 0;
     }
 
     public void setValor(String valor) {

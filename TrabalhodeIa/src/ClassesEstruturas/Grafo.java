@@ -5,10 +5,19 @@
  */
 package ClassesEstruturas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * @author Larica
+ * @author Ramon
  * @author Francesco
+ * @author Luís Guilherme Carvalho
  */
 public class Grafo {
+    public List<Node> nodes;
     
+    public Grafo()
+    {
+        nodes = new ArrayList<Node>();
+    }
 }
