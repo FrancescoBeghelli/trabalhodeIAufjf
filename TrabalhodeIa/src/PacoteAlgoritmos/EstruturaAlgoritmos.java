@@ -8,12 +8,8 @@ package PacoteAlgoritmos;
 import ClassesEstruturas.Adjacencia;
 import java.util.ArrayList;
 import ClassesEstruturas.Node;
-import ClassesEstruturas.Grafo;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -35,7 +31,7 @@ public class EstruturaAlgoritmos {
             if(abertos.isEmpty())
             {
                 sucesso = false;
-                return;
+                break;
             }
             else
             {
@@ -46,7 +42,7 @@ public class EstruturaAlgoritmos {
                 if(v.valor == destino.valor)
                 {
                     sucesso = true;
-                    return;
+                    break;
                 }
                 else
                 {
@@ -73,7 +69,7 @@ public class EstruturaAlgoritmos {
     }
     
     public static void buscaEmLargura(Node origem, Node destino) {
-        Queue<Node> abertos = new LinkedList<>();
+        LinkedList<Node> abertos = new LinkedList<>();
         HashMap<String, Node> visitados = new HashMap<>();
 
         abertos.add(origem);
@@ -85,18 +81,18 @@ public class EstruturaAlgoritmos {
             if(abertos.isEmpty())
             {
                 sucesso = false;
-                return;
+                break;
             }
             else
             {
-                Node v = abertos.remove();
+                Node v = abertos.removeFirst();
                 v.isSolucao = true;
                 System.out.println("Abrindo estado " + v.valor);
                 visitados.put(v.valor, v);
                 if(v.valor == destino.valor)
                 {
                     sucesso = true;
-                    return;
+                    break;
                 }
                 else
                 {
@@ -113,6 +109,63 @@ public class EstruturaAlgoritmos {
             numIteracoes++;
         }
 
+        if(sucesso)
+        {
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
+        }
+        else
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
+    }
+    
+    public static void backtracking(Node origem, Node destino, int count )
+    {
+        HashMap<String, Node> visitados = new HashMap<>();
+        Stack<Node> caminho = new Stack<>();
+        
+        boolean sucesso = false;
+        
+        caminho.push(origem);
+        visitados.put(origem.valor, origem);
+        
+        int numIteracoes = 0;
+        while(!sucesso)
+        {
+            boolean inseriu = false;
+            
+            if(caminho.isEmpty())
+            {
+                sucesso = false;
+                break;
+            }
+            else
+            {
+                Node v = caminho.peek();
+                if(v.valor == destino.valor)
+                {
+                    sucesso = true;
+                    break;
+                }
+                else
+                {
+                    for(Adjacencia adj : v.adjacencias.values())
+                    {
+                        Node prox = adj.getProx();
+                        if(!visitados.containsKey(prox.valor))
+                        {
+                            inseriu = true;
+                            caminho.add(prox);
+                            visitados.put(prox.valor, prox);
+                            break;
+                        }
+                    }
+                }
+            }
+            numIteracoes++;
+            
+            if(!inseriu)
+                caminho.pop();
+        }
+        
         if(sucesso)
         {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
