@@ -5,9 +5,12 @@
  */
 package PacoteAlgoritmos;
 
+import ClassesEstruturas.Adjacencia;
 import java.util.ArrayList;
 import ClassesEstruturas.Node;
 import ClassesEstruturas.Grafo;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -17,47 +20,58 @@ import java.util.Stack;
  */
 public class EstruturaAlgoritmos {
     
-    static void buscaEmProfundidade(Grafo grafo, Node origem) {
-    Stack<Node> pilha = new Stack<>();
-    ArrayList<Node> aberto = ;
-    
-    pilha.push(origem);
-    boolean fracasso = false;
-    boolean sucesso = false;    
-    
-    while (sucesso != false || fracasso != false) {
-        if(aberto == null)
-        
-        Node v = pilha.pop();
-        System.out.println(pilha);
+    public static void buscaEmProfundidade(Node origem, Node destino) {
+        Stack<Node> abertos = new Stack<>();
+        HashMap<String, Node> visitados = new HashMap<>();
 
-        for(int i = 0; i <v.adjacencias.size(); i++){
-            Node adj = v.adjacencias.get(i);
-            if(adj.visitado == false){
-                System.out.println(v + " >> "+adj);
-                pilha.push(adj);
-                adj.setVisitado();
-            }                
+        abertos.push(origem);
+
+        boolean sucesso = false;    
+        int numIteracoes = 0;
+        while (sucesso != false) {
+            if(abertos.isEmpty())
+            {
+                sucesso = false;
+                return;
+            }
+            else
+            {
+                Node v = abertos.pop();
+                v.isSolucao = true;
+                System.out.println("Abrindo estado " + v.valor);
+                visitados.put(v.valor, v);
+                if(v.valor == destino.valor)
+                {
+                    sucesso = true;
+                    return;
+                }
+                else
+                {
+                   for(Adjacencia adj : v.adjacencias){
+                        Node prox = adj.getProx();
+                        if(!visitados.containsKey(prox.valor)){
+                            System.out.println(v.valor + " >> " + prox.valor);
+                            abertos.push(prox);
+                        }                
+                    }
+                }
+            }
+
+            numIteracoes++;
         }
-    }
 
-    enquanto não (sucesso ou fracasso) faça
-        se abertos = vazio então
-            fracasso := T;
-        senão
-            N := primeiro(abertos); {pilha(topo), fila(primeiro)}
-            se N = solução então
-                sucesso := T;
-            senão
-                enquanto R(N) ≠ vazio faça
-                    escolha r de R(N); new(u);
-                    u := r(N); insere(u, abertos);
-                    atualiza R(N);
-                fim-enquanto;
-                insere(N, fechados); {destrua(N)}
-            fim-se;
-        fim-se;
-    fim-enquanto;
-}
+        if(sucesso)
+        {
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
+            imprimeSolução(visitados);
+        }
+        else
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
+    }
+    
+    public static void imprimeSolução(HashMap<String, Node> visitados)
+    {
+        
+    }
     
 }

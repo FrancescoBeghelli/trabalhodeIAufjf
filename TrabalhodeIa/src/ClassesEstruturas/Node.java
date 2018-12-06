@@ -11,30 +11,28 @@ public class Node {
 
     public String valor;
     public ArrayList<Adjacencia> adjacencias;
-
+    public boolean isSolucao;
+    
     public Node(String valor) {
         this.valor = valor;
         adjacencias = new ArrayList<>();
+        isSolucao = false;
     }
 
     public void setValor(String valor) {
         this.valor = valor;
     }
 
-    public boolean addCaminho(Node outroNode) {
+    public boolean addCaminho(Node outroNode, int dist) {
         if (adjacencias.contains(outroNode)) {
             return false;
         }
 
-        adjacencias.add(outroNode);
+        adjacencias.add(new Adjacencia(dist, outroNode) );
         return true;
     }
 
     public String toString() {
         return "" + valor;
     }
-
-    public void pai() {
-        System.out.println("O pai de " + valor + " é: " + pai);
-    }        
 }
