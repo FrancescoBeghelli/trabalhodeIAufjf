@@ -8,9 +8,14 @@ package PacoteAlgoritmos;
 import ClassesEstruturas.Adjacencia;
 import java.util.ArrayList;
 import ClassesEstruturas.Node;
+import ClassesEstruturas.NodeWithCost;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
+import javafx.collections.transformation.SortedList;
 
 /**
  * @author Ramon
@@ -117,7 +122,68 @@ public class EstruturaAlgoritmos {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
     }
     
-    public static void backtracking(Node origem, Node destino, int count )
+    
+    
+    public static void buscaOrdenada(Node origem, Node destino, int count )
+    {
+        ArrayList<NodeWithCost> abertos = new ArrayList<NodeWithCost>();
+                
+        HashMap<String, Node> visitados = new HashMap<>();
+        abertos.add(new NodeWithCost(origem, 0));
+        
+        boolean sucesso = false;
+        int numIteracoes = 0;
+        while(!sucesso)
+        {
+            if(abertos.isEmpty())
+            {
+                sucesso = false;
+                break;
+            }
+            else
+            {
+                NodeWithCost n = abertos.remove(0);
+                visitados.put(n.node.valor, n.node);
+                
+                if(n.node.valor == destino.valor)
+                {
+                    sucesso = true;
+                    break;
+                }
+                else
+                {
+                    for(Adjacencia adj : n.node.adjacencias.values())
+                    {
+                        Node prox = adj.getProx();
+                        if(!visitados.containsKey(prox.valor))
+                            abertos.add(new NodeWithCost(prox, n.custoTotal + adj.getDist()));
+                        else
+                        {
+                            int i;
+                            for(i = 0; i < abertos.size(); i++)
+                            {
+                                if(abertos.get(i).node.valor == prox.valor)
+                                {
+                                    abertos.get(i).custoTotal = abertos.get(i).custoTotal < n.custoTotal + adj.getDist() ? abertos.get(i).custoTotal : n.custoTotal + adj.getDist();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    
+                    Collections.sort(abertos, new Comparator<NodeWithCost>(){
+                        @Override
+                        public int compare(NodeWithCost o1, NodeWithCost o2) {
+                            return o1.custoTotal - o2.custoTotal;
+                        }
+                    });
+                }
+            }
+            numIteracoes++;
+        }
+    }
+    
+    public static void backtracking(Node origem, Node destino)
     {
         HashMap<String, Node> visitados = new HashMap<>();
         Stack<Node> caminho = new Stack<>();
@@ -153,7 +219,7 @@ public class EstruturaAlgoritmos {
                         if(!visitados.containsKey(prox.valor))
                         {
                             inseriu = true;
-                            caminho.add(prox);
+                            caminho.push(prox);
                             visitados.put(prox.valor, prox);
                             break;
                         }
