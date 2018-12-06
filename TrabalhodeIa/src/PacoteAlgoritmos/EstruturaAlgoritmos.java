@@ -11,7 +11,9 @@ import ClassesEstruturas.Node;
 import ClassesEstruturas.Grafo;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -64,14 +66,63 @@ public class EstruturaAlgoritmos {
         if(sucesso)
         {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
-            imprimeSolucao(visitados);
+            imprimeSolucaoEmProfundidade(visitados);
+        }
+        else
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
+    }
+    
+    public static void buscaEmLargura(Node origem, Node destino) {
+        Queue<Node> abertos = new LinkedList<>();
+        HashMap<String, Node> visitados = new HashMap<>();
+
+        abertos.add(origem);
+
+        boolean sucesso = false;    
+        int numIteracoes = 0;
+        
+        while (sucesso != false) {
+            if(abertos.isEmpty())
+            {
+                sucesso = false;
+                return;
+            }
+            else
+            {
+                Node v = abertos.remove();
+                v.isSolucao = true;
+                System.out.println("Abrindo estado " + v.valor);
+                visitados.put(v.valor, v);
+                if(v.valor == destino.valor)
+                {
+                    sucesso = true;
+                    return;
+                }
+                else
+                {
+                   for(Adjacencia adj : v.adjacencias.values()){
+                        Node prox = adj.getProx();
+                        if(!visitados.containsKey(prox.valor)){
+                            System.out.println(v.valor + " >> " + prox.valor);
+                            abertos.add(prox);
+                        }                
+                    }
+                }
+            }
+
+            numIteracoes++;
+        }
+
+        if(sucesso)
+        {
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }
         else
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
     }
     
     //computa o conjunto solução
-    public static void imprimeSolucao(HashMap<String, Node> visitados)
+    public static void imprimeSolucaoEmProfundidade(HashMap<String, Node> visitados)
     {
         System.out.println("Conjunto solução: ");
         StringBuilder sb = new StringBuilder();
