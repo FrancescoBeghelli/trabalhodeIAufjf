@@ -14,6 +14,11 @@ public class Node {
     public HashMap<String, Adjacencia> adjacencias;
     public boolean isSolucao;
     
+    public Node() {
+        adjacencias = new HashMap<>();
+        isSolucao = false;
+    }
+    
     public Node(String valor) {
         this.valor = valor;
         adjacencias = new HashMap<>();

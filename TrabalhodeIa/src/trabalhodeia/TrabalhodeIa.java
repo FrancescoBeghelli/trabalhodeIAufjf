@@ -5,8 +5,12 @@
  */
 package trabalhodeia;
 
+import ClassesEstruturas.Grafo;
+import ClassesEstruturas.LeituraArquivo;
+import PacoteAlgoritmos.EstruturaAlgoritmos;
+
 /**
- * @author Larica
+ * @author Ramon
  * @author Francesco
  */
 public class TrabalhodeIa {
@@ -15,7 +19,13 @@ public class TrabalhodeIa {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        LeituraArquivo la = new LeituraArquivo();
+        Grafo g = new Grafo();
+        g = la.lerArquivo();
+        
+        EstruturaAlgoritmos.backtracking(g.nodes.get(0), g.nodes.get(8));
+        EstruturaAlgoritmos.buscaOrdenada(g.nodes.get(0), g.nodes.get(6), 5);
+        EstruturaAlgoritmos.buscaEmLargura(g.nodes.get(7), g.nodes.get(1));
     }
     
 }
