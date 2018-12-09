@@ -29,13 +29,16 @@ public class LeituraArquivo {
             Scanner scanner = new Scanner(in);
             String qtd = scanner.nextLine();
             for(int i = 0; i < Integer.valueOf(qtd); i++) {
-                Node node = new Node(String.valueOf(i));
+                Node node = new Node();
+                node.valor = scanner.next();
+                node.heuristica = Integer.valueOf(scanner.next());
+                System.out.println("Nó: " + i + " - Valor: " + node.valor + " - Heurística: " + node.heuristica);
                 list.add(node);
             }
             
             while(scanner.hasNext()) {
-                int origem = Integer.valueOf(scanner.next()) - 1;
-                int destino = Integer.valueOf(scanner.next()) - 1;
+                int origem = Integer.valueOf(scanner.next());
+                int destino = Integer.valueOf(scanner.next());
                 int dist = Integer.valueOf(scanner.next());
                 
                 list.get(origem).addCaminho(list.get(destino), dist);
