@@ -129,6 +129,7 @@ public class EstruturaAlgoritmos {
 
                 if (n.node.valor == destino.valor) {
                     sucesso = true;
+                    System.out.println(n.custoTotal);
                     break;
                 } else {
                     for (Adjacencia adj : n.node.adjacencias.values()) {
