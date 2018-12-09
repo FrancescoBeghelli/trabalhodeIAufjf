@@ -25,6 +25,13 @@ public class Node {
         adjacencias = new HashMap<>();
         isSolucao = false;
     }
+    
+    public Node(String valor, int heuristica) {
+        this.valor = valor;
+        adjacencias = new HashMap<>();
+        isSolucao = false;
+        this.heuristica = heuristica;
+    }
 
     public void setValor(String valor) {
         this.valor = valor;
