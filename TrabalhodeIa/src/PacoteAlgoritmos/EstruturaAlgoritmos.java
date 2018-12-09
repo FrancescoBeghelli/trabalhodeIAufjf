@@ -189,7 +189,7 @@ public class EstruturaAlgoritmos {
                             inseriu = true;
                             caminho.push(prox);
                             visitados.put(prox.valor, prox);
-                            System.out.println(caminho.lastElement().valor);
+                            System.out.print("[" + caminho.lastElement().valor + "] ");
                             custo = custo + adj.getDist();
                             break;
                         }
@@ -204,7 +204,7 @@ public class EstruturaAlgoritmos {
         }
 
         if (sucesso) {
-            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações.\n Custo: " + custo);
+            System.out.println("\nAlgoritmo achou o elemento com " + numIteracoes + " iterações.\nCusto: " + custo);
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }
