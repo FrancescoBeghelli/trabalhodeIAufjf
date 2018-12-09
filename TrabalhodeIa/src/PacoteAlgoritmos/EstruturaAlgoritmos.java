@@ -110,7 +110,7 @@ public class EstruturaAlgoritmos {
         }
     }
 
-    public static void buscaOrdenada(Node origem, Node destino, int count) {
+    public static void buscaOrdenada(Node origem, Node destino) {
         System.out.println("***Busca ordenada***");
         ArrayList<NodeWithCost> abertos = new ArrayList<NodeWithCost>();
 

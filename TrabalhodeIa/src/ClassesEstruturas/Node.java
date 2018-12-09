@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class Node {
 
     public String valor;
+    public int heuristica;
     public HashMap<String, Adjacencia> adjacencias;
     public boolean isSolucao;
     
@@ -18,7 +19,7 @@ public class Node {
         adjacencias = new HashMap<>();
         isSolucao = false;
     }
-    
+
     public Node(String valor) {
         this.valor = valor;
         adjacencias = new HashMap<>();
