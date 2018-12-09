@@ -179,17 +179,20 @@ public class EstruturaAlgoritmos {
                 break;
             } else {
                 Node v = caminho.peek();
+                System.out.println("\nAbrindo estado " + v.valor);
                 if (v.valor == destino.valor) {
                     sucesso = true;
                     break;
                 } else {
+                    for (Adjacencia adj : v.adjacencias.values()) {
+                        System.out.println(v.valor + " >> " + adj.getProx().valor);
+                    }
                     for (Adjacencia adj : v.adjacencias.values()) {
                         Node prox = adj.getProx();
                         if (!visitados.containsKey(prox.valor)) {
                             inseriu = true;
                             caminho.push(prox);
                             visitados.put(prox.valor, prox);
-                            System.out.print("[" + caminho.lastElement().valor + "] ");
                             custo = custo + adj.getDist();
                             break;
                         }
@@ -204,6 +207,10 @@ public class EstruturaAlgoritmos {
         }
 
         if (sucesso) {
+            System.out.println("Caminho:");
+            for (Node node : caminho) {
+                System.out.print("[" + node.valor + "] ");
+            }
             System.out.println("\nAlgoritmo achou o elemento com " + numIteracoes + " iterações.\nCusto: " + custo);
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
