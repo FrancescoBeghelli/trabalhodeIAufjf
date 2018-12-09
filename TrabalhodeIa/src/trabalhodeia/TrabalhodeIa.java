@@ -71,15 +71,15 @@ public class TrabalhodeIa {
               erro = false;
             }//fim do if  
             if(opcao > 4) {
-              System.out.println("Escolha um número entre 0 e 4\n");
+              System.out.println("Escolha um número entre 0 e 7\n");
             }//fim do if
           }//fim do try
         catch(NumberFormatException e) {
-        System.out.println("Escolha um número entre 0 e 4\n");
+        System.out.println("Escolha um número entre 0 e 7\n");
         opcao = 0;
         }//fim do catch
         } while (erro);//fim do...while
-        System.out.println("Escolha um número entre 0 e 4\n");
+        System.out.println("Escolha um número entre 0 e 7\n");
       }//fim do método
 }
     
