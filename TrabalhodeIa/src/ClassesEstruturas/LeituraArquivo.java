@@ -24,7 +24,7 @@ public class LeituraArquivo {
         Grafo g = new Grafo();
         List<Node> list = new ArrayList<>();
         try {
-            File file = new File("/home/ramonlarivoir/Área de Trabalho/Ramon/Materiais UFJF/Inteligência Artificial/Trabalho/Projeto/trabalhodeIAufjf/TrabalhodeIa/src/ClassesEstruturas/grafo.txt");
+            File file = new File("C:\\Users\\Francesco\\Documents\\NetBeansProjects\\TrabalhodeIa\\TrabalhodeIa\\src\\ClassesEstruturas/grafo.txt");
             FileInputStream in = new FileInputStream(file);
             Scanner scanner = new Scanner(in);
             String qtd = scanner.nextLine();
