@@ -25,7 +25,7 @@ import javafx.collections.transformation.SortedList;
 public class EstruturaAlgoritmos {
 
     public static void buscaEmProfundidade(Node origem, Node destino) {
-        System.out.println("***Busca em profundidade***");
+        System.out.println("\n***Busca em profundidade***");
         Stack<Node> abertos = new Stack<>();
         HashMap<String, Node> visitados = new HashMap<>();
 
@@ -68,7 +68,7 @@ public class EstruturaAlgoritmos {
     }
 
     public static void buscaEmLargura(Node origem, Node destino) {
-        System.out.println("***Busca em largura***");
+        System.out.println("\n***Busca em largura***");
         LinkedList<Node> abertos = new LinkedList<>();
         HashMap<String, Node> visitados = new HashMap<>();
 
@@ -84,7 +84,7 @@ public class EstruturaAlgoritmos {
             } else {
                 Node v = abertos.removeFirst();
                 v.isSolucao = true;
-                System.out.println("Abrindo estado " + v.valor);
+                System.out.println("\nAbrindo estado " + v.valor);
                 visitados.put(v.valor, v);
                 if (v.valor == destino.valor) {
                     sucesso = true;
@@ -111,7 +111,7 @@ public class EstruturaAlgoritmos {
     }
 
     public static void buscaOrdenada(Node origem, Node destino) {
-        System.out.println("***Busca ordenada***");
+        System.out.println("\n***Busca ordenada***");
         ArrayList<NodeWithCost> abertos = new ArrayList<NodeWithCost>();
 
         HashMap<String, Node> visitados = new HashMap<>();
@@ -159,9 +159,10 @@ public class EstruturaAlgoritmos {
     }
 
     public static void backtracking(Node origem, Node destino) {
-        System.out.println("***Backtracking***");
+        System.out.println("\n***Backtracking***");
         HashMap<String, Node> visitados = new HashMap<>();
         Stack<Node> caminho = new Stack<>();
+        int custo = 0;
 
         boolean sucesso = false;
 
@@ -187,6 +188,8 @@ public class EstruturaAlgoritmos {
                             inseriu = true;
                             caminho.push(prox);
                             visitados.put(prox.valor, prox);
+                            System.out.println(caminho.lastElement().valor);
+                            custo = custo + adj.getDist();
                             break;
                         }
                     }
@@ -200,7 +203,7 @@ public class EstruturaAlgoritmos {
         }
 
         if (sucesso) {
-            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações.\n Custo: " + custo);
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }

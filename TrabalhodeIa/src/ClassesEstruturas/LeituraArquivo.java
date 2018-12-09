@@ -32,7 +32,6 @@ public class LeituraArquivo {
                 Node node = new Node();
                 node.valor = scanner.next();
                 node.heuristica = Integer.valueOf(scanner.next());
-                System.out.println("Nó: " + i + " - Valor: " + node.valor + " - Heurística: " + node.heuristica);
                 list.add(node);
             }
             
