@@ -8,6 +8,7 @@ package trabalhodeia;
 import ClassesEstruturas.Grafo;
 import ClassesEstruturas.LeituraArquivo;
 import PacoteAlgoritmos.EstruturaAlgoritmos;
+import PacoteAlgoritmos.EstruturaAlgoritmosInformados;
 import java.util.Scanner;
 
 /**
@@ -34,7 +35,7 @@ public class TrabalhodeIa {
             System.out.println("( 2 ) - backtracking");
             System.out.println("( 3 ) - buscaOrdenada");
             System.out.println("( 4 ) - buscaEmLargura");
-            System.out.println("( 5 ) - Listar Funcionários");
+            System.out.println("( 5 ) - buscaGulosa");
             System.out.println("( 6 ) - Listar Funcionários");
             System.out.println("( 7 ) - Listar Funcionários");
             System.out.println("( 0 ) - Sair do Programa a qualquer momento");
@@ -58,7 +59,7 @@ public class TrabalhodeIa {
                 EstruturaAlgoritmos.buscaEmLargura(g.nodes.get(0), g.nodes.get(1));
             }
             if(opcao == 5){
-                //EstruturaAlgoritmos.buscaEmLargura(g.nodes.get(0), g.nodes.get(1));
+                EstruturaAlgoritmosInformados.buscaGulosa(g.nodes.get(0), g.nodes.get(1));
             }
             if(opcao == 6){
                 //EstruturaAlgoritmos.buscaEmLargura(g.nodes.get(0), g.nodes.get(1));
