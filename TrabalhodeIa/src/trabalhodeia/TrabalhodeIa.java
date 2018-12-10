@@ -36,7 +36,7 @@ public class TrabalhodeIa {
             System.out.println("( 3 ) - buscaOrdenada");
             System.out.println("( 4 ) - buscaEmLargura");
             System.out.println("( 5 ) - buscaGulosa");
-            System.out.println("( 6 ) - Listar Funcionários");
+            System.out.println("( 6 ) - buscaAEstrela");
             System.out.println("( 7 ) - Listar Funcionários");
             System.out.println("( 0 ) - Sair do Programa a qualquer momento");
             System.out.printf("Digite uma opcão: ");
@@ -62,7 +62,7 @@ public class TrabalhodeIa {
                 EstruturaAlgoritmosInformados.buscaGulosa(g.nodes.get(0), g.nodes.get(1));
             }
             if(opcao == 6){
-                //EstruturaAlgoritmos.buscaEmLargura(g.nodes.get(0), g.nodes.get(1));
+                EstruturaAlgoritmosInformados.buscaAEstrela(g.nodes.get(0), g.nodes.get(1));
             }
             if(opcao == 7){
                 //EstruturaAlgoritmos.buscaEmLargura(g.nodes.get(0), g.nodes.get(1));
