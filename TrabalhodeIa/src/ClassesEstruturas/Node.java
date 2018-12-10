@@ -15,16 +15,19 @@ public class Node {
     public int heuristica;
     public LinkedHashMap<String, Adjacencia> adjacencias;
     public boolean isSolucao;
+    public Node antecessor;
     
     public Node() {
         adjacencias = new LinkedHashMap<>();
         isSolucao = false;
+        antecessor = null;
     }
 
     public Node(String valor) {
         this.valor = valor;
         adjacencias = new LinkedHashMap<>();
         isSolucao = false;
+        antecessor = null;
     }
     
     public Node(String valor, int heuristica) {
