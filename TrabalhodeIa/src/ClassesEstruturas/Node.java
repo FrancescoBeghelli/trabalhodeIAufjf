@@ -16,11 +16,19 @@ public class Node {
     public LinkedHashMap<String, Adjacencia> adjacencias;
     public boolean isSolucao;
     public Node antecessor;
+    public Node no;
     
     public Node() {
         adjacencias = new LinkedHashMap<>();
         isSolucao = false;
         antecessor = null;
+    }
+    
+    public Node(Node antecessor, String valor) {
+        adjacencias = new LinkedHashMap<>();
+        isSolucao = false;
+        this.antecessor = antecessor;
+        this.valor = valor;
     }
 
     public Node(String valor) {

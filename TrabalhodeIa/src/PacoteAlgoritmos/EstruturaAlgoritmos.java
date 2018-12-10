@@ -27,32 +27,38 @@ public class EstruturaAlgoritmos {
 
     public static void buscaEmProfundidade(Node origem, Node destino) {
         System.out.println("\n***Busca em profundidade***");
-        Stack<Node> abertos = new Stack<>();
+        Stack<NodeWithCost> abertos = new Stack<>();
+        LinkedList<Node> todosAbertos = new LinkedList<>();
         LinkedHashMap<String, Node> visitados = new LinkedHashMap<>();
 
-        abertos.push(origem);
+        abertos.push(new NodeWithCost(null, origem, 0));
+        todosAbertos.add(origem);
 
         boolean sucesso = false;
         int numIteracoes = 0;
+        NodeWithCost estadoFinal = null;
+        
         while (sucesso != true) {
             if (abertos.isEmpty()) {
                 sucesso = false;
                 break;
             } else {
-                Node v = abertos.pop();
-                v.isSolucao = true;
-                System.out.println("Abrindo estado " + v.valor);
-                visitados.put(v.valor, v);
-                System.out.println("\n\n"+visitados+"\n\n");
-                if (v.valor == destino.valor) {
+                NodeWithCost n = abertos.pop();
+                n.node.isSolucao = true;
+                System.out.println("Abrindo estado " + n.node.valor);
+                visitados.put(n.node.valor, n.node);
+                System.out.println("\n\n" + visitados + "\n\n");
+                if (n.node.valor == destino.valor) {
                     sucesso = true;
+                    estadoFinal = n;
                     break;
                 } else {
-                    for (Adjacencia adj : v.adjacencias.values()) {
+                    for (Adjacencia adj : n.node.adjacencias.values()) {
                         Node prox = adj.getProx();
                         if (!visitados.containsKey(prox.valor)) {
-                            System.out.println(v.valor + " >> " + prox.valor);
-                            abertos.push(prox);
+                            System.out.println(n.node.valor + " >> " + prox.valor);
+                            abertos.push(new NodeWithCost(n, prox, n.custoTotal + adj.getDist()));
+                            todosAbertos.add(prox);
                         }
                     }
                 }
@@ -63,7 +69,7 @@ public class EstruturaAlgoritmos {
 
         if (sucesso) {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
-            imprimeSolucaoEmProfundidade(visitados);
+            imprimeSolucao(visitados, todosAbertos, estadoFinal);
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }
@@ -71,32 +77,36 @@ public class EstruturaAlgoritmos {
 
     public static void buscaEmLargura(Node origem, Node destino) {
         System.out.println("\n***Busca em largura***");
-        LinkedList<Node> abertos = new LinkedList<>();
-        HashMap<String, Node> visitados = new HashMap<>();
+        LinkedList<NodeWithCost> abertos = new LinkedList<>();
+        LinkedList<Node> todosAbertos = new LinkedList<>();
+        LinkedHashMap<String, Node> visitados = new LinkedHashMap<>();
 
-        abertos.add(origem);
+        abertos.add(new NodeWithCost(null, origem, 0));
+        todosAbertos.add(origem);
 
         boolean sucesso = false;
         int numIteracoes = 0;
+        NodeWithCost estadoFinal = null;
 
         while (sucesso != true) {
             if (abertos.isEmpty()) {
                 sucesso = false;
                 break;
             } else {
-                Node v = abertos.removeFirst();
-                v.isSolucao = true;
-                System.out.println("\nAbrindo estado " + v.valor);
-                visitados.put(v.valor, v);
-                if (v.valor == destino.valor) {
+                NodeWithCost n = abertos.removeFirst();
+                System.out.println("\nAbrindo estado " + n.node.valor);
+                visitados.put(n.node.valor, n.node);
+                if (n.node.valor == destino.valor) {
                     sucesso = true;
+                    estadoFinal = n;
                     break;
                 } else {
-                    for (Adjacencia adj : v.adjacencias.values()) {
+                    for (Adjacencia adj : n.node.adjacencias.values()) {
                         Node prox = adj.getProx();
                         if (!visitados.containsKey(prox.valor)) {
-                            System.out.println(v.valor + " >> " + prox.valor);
-                            abertos.add(prox);
+                            System.out.println(n.node.valor + " >> " + prox.valor);
+                            abertos.add(new NodeWithCost(n, prox, n.custoTotal + adj.getDist()));
+                            todosAbertos.add(prox);
                         }
                     }
                 }
@@ -106,7 +116,8 @@ public class EstruturaAlgoritmos {
         }
 
         if (sucesso) {
-            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações.");
+            imprimeSolucao(visitados, todosAbertos, estadoFinal);
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }
@@ -145,12 +156,11 @@ public class EstruturaAlgoritmos {
                             int i;
                             for (i = 0; i < abertos.size(); i++) {
                                 if (abertos.get(i).node.valor == prox.valor) {
-                                    if(abertos.get(i).custoTotal > n.custoTotal + adj.getDist())
-                                    {
-                                        abertos.get(i).custoTotal =  n.custoTotal + adj.getDist();
+                                    if (abertos.get(i).custoTotal > n.custoTotal + adj.getDist()) {
+                                        abertos.get(i).custoTotal = n.custoTotal + adj.getDist();
                                         abertos.get(i).anterior = n;
                                     }
-                                    
+
                                     break;
                                 }
                             }
@@ -167,21 +177,20 @@ public class EstruturaAlgoritmos {
             }
             numIteracoes++;
         }
-        
+
         if (sucesso) {
             System.out.println("Caminho:");
             StringBuilder sb = new StringBuilder();
-            
+
             sb.append("]");
-            while(estadoFinal != null)
-            {
+            while (estadoFinal != null) {
                 sb.insert(0, estadoFinal.node.valor + " ");
                 estadoFinal = estadoFinal.anterior;
             }
             sb.insert(0, "[");
-            
+
             System.out.println(sb.toString());
-            
+
             System.out.println("\nAlgoritmo achou o elemento com " + numIteracoes + " iterações.\n");
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
@@ -267,6 +276,24 @@ public class EstruturaAlgoritmos {
 
         System.out.println("Conjunto solução: " + sb);
         System.out.println("Custo total: " + custo);
+    }
+
+    public static void imprimeSolucao(LinkedHashMap<String, Node> visitados, LinkedList<Node> abertos, NodeWithCost estadoFinal) {
+        int custo = estadoFinal.custoTotal;
+        System.out.println("\nNós abertos: ");
+        for (Node aberto : abertos) {
+            System.out.print("[" + aberto.valor + "] ");
+        }
+        System.out.println("\n\nNós visitados:");
+        for (Node value : visitados.values()) {
+            System.out.print("[" + value.valor + "] ");
+        }
+        System.out.println("\n\nSolução final:");
+        while (estadoFinal != null) {
+            System.out.print("[" + estadoFinal.node + "] ");
+            estadoFinal = estadoFinal.anterior;
+        }
+        System.out.println("\n\nCusto final: " + custo);
     }
 
 }
