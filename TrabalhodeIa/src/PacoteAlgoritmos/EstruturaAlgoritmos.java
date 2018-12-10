@@ -45,9 +45,8 @@ public class EstruturaAlgoritmos {
             } else {
                 NodeWithCost n = abertos.pop();
                 n.node.isSolucao = true;
-                System.out.println("Abrindo estado " + n.node.valor);
+                System.out.println("\nAbrindo estado " + n.node.valor);
                 visitados.put(n.node.valor, n.node);
-                System.out.println("\n\n" + visitados + "\n\n");
                 if (n.node.valor == destino.valor) {
                     sucesso = true;
                     estadoFinal = n;
@@ -245,11 +244,11 @@ public class EstruturaAlgoritmos {
         }
 
         if (sucesso) {
-            System.out.println("Caminho:");
+            System.out.println("\nCaminho:");
             for (Node node : caminho) {
                 System.out.print("[" + node.valor + "] ");
             }
-            System.out.println("\nAlgoritmo achou o elemento com " + numIteracoes + " iterações.\nCusto: " + custo);
+            System.out.println("\n\nAlgoritmo achou o elemento com " + numIteracoes + " iterações.\n\nCusto: " + custo);
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }
