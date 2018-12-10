@@ -2,6 +2,7 @@ package ClassesEstruturas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * @author Ramon
@@ -12,23 +13,23 @@ public class Node {
 
     public String valor;
     public int heuristica;
-    public HashMap<String, Adjacencia> adjacencias;
+    public LinkedHashMap<String, Adjacencia> adjacencias;
     public boolean isSolucao;
     
     public Node() {
-        adjacencias = new HashMap<>();
+        adjacencias = new LinkedHashMap<>();
         isSolucao = false;
     }
 
     public Node(String valor) {
         this.valor = valor;
-        adjacencias = new HashMap<>();
+        adjacencias = new LinkedHashMap<>();
         isSolucao = false;
     }
     
     public Node(String valor, int heuristica) {
         this.valor = valor;
-        adjacencias = new HashMap<>();
+        adjacencias = new LinkedHashMap<>();
         isSolucao = false;
         this.heuristica = heuristica;
     }
