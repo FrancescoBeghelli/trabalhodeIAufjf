@@ -69,11 +69,18 @@ public class EstruturaAlgoritmosInformados {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
             StringBuilder sb = new StringBuilder();
             sb.append("{");
+            int custoTotal = 0;
+            Node anterior = null;
             for (Node node : solucao) {
                 sb.append(" " + node.valor);
+                
+                if(anterior != null)
+                    custoTotal += node.adjacencias.get(anterior.valor).getDist();
+                anterior = node;
             }
             sb.append("}");
             System.out.println(sb.toString());
+            System.out.println("Custo total " + custoTotal);
         } else {
             System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }
