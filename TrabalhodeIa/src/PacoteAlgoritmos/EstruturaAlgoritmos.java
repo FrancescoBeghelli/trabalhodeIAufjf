@@ -117,10 +117,11 @@ public class EstruturaAlgoritmos {
         ArrayList<NodeWithCost> abertos = new ArrayList<NodeWithCost>();
 
         HashMap<String, Node> visitados = new HashMap<>();
-        abertos.add(new NodeWithCost(origem, 0));
+        abertos.add(new NodeWithCost(null, origem, 0));
 
         boolean sucesso = false;
         int numIteracoes = 0;
+        NodeWithCost estadoFinal = null;
         while (!sucesso) {
             if (abertos.isEmpty()) {
                 sucesso = false;
@@ -128,16 +129,18 @@ public class EstruturaAlgoritmos {
             } else {
                 NodeWithCost n = abertos.remove(0);
                 visitados.put(n.node.valor, n.node);
+                System.out.println("Abrindo o estado " + n.node.valor);
 
                 if (n.node.valor == destino.valor) {
                     sucesso = true;
-                    System.out.println(n.custoTotal);
+                    System.out.println("Custo Total " + n.custoTotal);
+                    estadoFinal = n;
                     break;
                 } else {
                     for (Adjacencia adj : n.node.adjacencias.values()) {
                         Node prox = adj.getProx();
                         if (!visitados.containsKey(prox.valor)) {
-                            abertos.add(new NodeWithCost(prox, n.custoTotal + adj.getDist()));
+                            abertos.add(new NodeWithCost(n, prox, n.custoTotal + adj.getDist()));
                         } else {
                             int i;
                             for (i = 0; i < abertos.size(); i++) {
@@ -158,6 +161,26 @@ public class EstruturaAlgoritmos {
                 }
             }
             numIteracoes++;
+        }
+        
+        if (sucesso) {
+            System.out.println("Caminho:");
+            StringBuilder sb = new StringBuilder();
+            
+            int custoTotal = 0;
+            sb.append("]");
+            while(estadoFinal != null)
+            {
+                sb.insert(0, estadoFinal.node.valor + " ");
+                estadoFinal = estadoFinal.anterior;
+            }
+            sb.insert(0, "[");
+            
+            System.out.println(sb.toString());
+            
+            System.out.println("\nAlgoritmo achou o elemento com " + numIteracoes + " iterações.\n");
+        } else {
+            System.out.println("Algoritmo achou o elemento com " + numIteracoes + " iterações");
         }
     }
 
