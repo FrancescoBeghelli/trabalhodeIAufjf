@@ -145,7 +145,12 @@ public class EstruturaAlgoritmos {
                             int i;
                             for (i = 0; i < abertos.size(); i++) {
                                 if (abertos.get(i).node.valor == prox.valor) {
-                                    abertos.get(i).custoTotal = abertos.get(i).custoTotal < n.custoTotal + adj.getDist() ? abertos.get(i).custoTotal : n.custoTotal + adj.getDist();
+                                    if(abertos.get(i).custoTotal > n.custoTotal + adj.getDist())
+                                    {
+                                        abertos.get(i).custoTotal =  n.custoTotal + adj.getDist();
+                                        abertos.get(i).anterior = n;
+                                    }
+                                    
                                     break;
                                 }
                             }
@@ -167,7 +172,6 @@ public class EstruturaAlgoritmos {
             System.out.println("Caminho:");
             StringBuilder sb = new StringBuilder();
             
-            int custoTotal = 0;
             sb.append("]");
             while(estadoFinal != null)
             {
