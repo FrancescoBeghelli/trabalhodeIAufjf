@@ -12,6 +12,7 @@ import ClassesEstruturas.NodeWithCost;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -27,7 +28,7 @@ public class EstruturaAlgoritmos {
     public static void buscaEmProfundidade(Node origem, Node destino) {
         System.out.println("\n***Busca em profundidade***");
         Stack<Node> abertos = new Stack<>();
-        HashMap<String, Node> visitados = new HashMap<>();
+        LinkedHashMap<String, Node> visitados = new LinkedHashMap<>();
 
         abertos.push(origem);
 
@@ -42,6 +43,7 @@ public class EstruturaAlgoritmos {
                 v.isSolucao = true;
                 System.out.println("Abrindo estado " + v.valor);
                 visitados.put(v.valor, v);
+                System.out.println("\n\n"+visitados+"\n\n");
                 if (v.valor == destino.valor) {
                     sucesso = true;
                     break;
@@ -218,7 +220,7 @@ public class EstruturaAlgoritmos {
     }
 
     //computa o conjunto solução
-    public static void imprimeSolucaoEmProfundidade(HashMap<String, Node> visitados) {
+    public static void imprimeSolucaoEmProfundidade(LinkedHashMap<String, Node> visitados) {
         StringBuilder sb = new StringBuilder();
 
         Node anterior = null;
